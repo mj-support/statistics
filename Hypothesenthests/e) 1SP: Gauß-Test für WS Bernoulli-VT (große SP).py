@@ -22,9 +22,9 @@ if operator == "=":
     KW_satz = "z_[{0}/2] = {1}, z_[1 - {0}/2] = {2}".format(𝛼, KW[0], KW[1])
     KB = "[-∞; {0}] ∩ [{1}; +∞]".format(KW[0], KW[1])
     if T > KW[0] or T < KW[1]:
-        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Zu {0}% können wir davon ausgehen, dass p {1} {2} falsch ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Zu {0}% können wir davon ausgehen, dass p {1} {2} ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
     else:
-        antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass p {1} {2} ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
+        antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass p {1} {2} falsch ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
 elif operator == ">":
     H_0 = "p {0} {1}".format("<=", vergleichswert)
     H_1 = "p {0} {1}".format(">", vergleichswert)

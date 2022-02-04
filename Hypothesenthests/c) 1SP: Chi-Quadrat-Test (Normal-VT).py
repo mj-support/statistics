@@ -22,9 +22,9 @@ if operator == "=":
     KW_satz = "Chi-Quadrat_[{0}/2; {1} - 1] = {2}, Chi-Quadrat_[1 - {0}/2, {1} - 1] = {3}".format(𝛼, n, KW[0], KW[1])
     KB = "[-∞; {0}] ∩ [{1}; +∞]".format(KW[0], KW[1])
     if T > KW[0] or T < KW[1]:
-        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} falsch ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
     else:
-        antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} ist".format((1 - 𝛼) * 100, operator, vergleichswert)
+        antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} falsch ist".format((1 - 𝛼) * 100, operator, vergleichswert)
 elif operator == ">":
     H_0 = "σ^2 {0} {1}".format("<=", vergleichswert)
     H_1 = "σ^2 {0} {1}".format(">", vergleichswert)

@@ -20,8 +20,8 @@ if operator == "=":
     H_1 = "σ^2 {0} {1}".format("≠", vergleichswert)
     KW = [round(chi2.ppf(𝛼 / 2, n - 1), 3), round(chi2.ppf(1 - (𝛼 / 2), n - 1), 3)]
     KW_satz = "Chi-Quadrat_[{0}/2; {1} - 1] = {2}, Chi-Quadrat_[1 - {0}/2, {1} - 1] = {3}".format(𝛼, n, KW[0], KW[1])
-    KB = "[-∞; {0}] ∩ [{1}; +∞]".format(KW[0], KW[1])
-    if T > KW[0] or T < KW[1]:
+    KB = "[-∞; {0}] v [{1}; +∞]".format(KW[0], KW[1])
+    if T > KW[0] and T < KW[1]:
         antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} ist.".format((1 - 𝛼) * 100, operator, vergleichswert)
     else:
         antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} falsch ist".format((1 - 𝛼) * 100, operator, vergleichswert)
@@ -46,7 +46,7 @@ elif operator == "<":
     else:
         antwortsatz = "T∈K -> H_0 kann verworfen werden. Zu {0}% können wir davon ausgehen, dass σ^2 {1} {2} ist".format((1 - 𝛼) * 100, operator, vergleichswert)
 
-print(os.path.basename(__file__)[:-3])
+print(os.path.basename(__file__)[3:-3])
 print("H_0: {0}".format(H_0))
 print("H_1: {0}".format(H_1))
 print("T = (({0} - 1) * {1})/{2} = {3}".format(n, S_hoch2, σ_hoch2_0, T))

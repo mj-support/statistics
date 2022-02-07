@@ -7,9 +7,9 @@ import os
 
 """Eingabe"""
 operator = "="
-n = 10  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
-m = 10  # Anzahl Werte Y
-x̅ = 200   # Mittelwert
+n = 567  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
+m = 646  # Anzahl Werte Y
+x̅ = 397   # Mittelwert
 Y̅ = 190
 S_hoch2_x = 722.22  # Stichprobenvarianz
 S_hoch2_y = 332

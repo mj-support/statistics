@@ -6,14 +6,14 @@ import os
 # siehe Ü3.9a
 
 """Eingabe"""
-vergleichswert = 0
-operator = "="
+vergleichswert = 1200
+operator = "<"
 Y = "Erwartungswert"    # "Erwartungswert
-n = 16
-x̅ = 2   # Mittelwert
+n = 100
+x̅ = 1165   # Mittelwert
 µ_0 = vergleichswert  # unbekannter Erwartungswert
-σ = 3   # Wurzel aus wahren Varianz
-𝛼 = 0.005
+σ = 200   # Wurzel aus wahren Varianz
+𝛼 = 0.05
 
 T = round(math.sqrt(n) * (x̅ - µ_0) / σ, 3)
 
@@ -55,3 +55,5 @@ print("T = (WURZEL({0}) * ({1} - {2})/{3} = {4}".format(n, x̅, µ_0, σ, T))
 print("KW = {0}".format(KW_satz))
 print("KB = {0}".format(KB))
 print(antwortsatz)
+
+

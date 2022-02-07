@@ -6,13 +6,13 @@ import os
 # Ü3.8b, Ü3.11c
 
 """Eingabe"""
-operator = ">"
-n = 400  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
-m = 380  # Anzahl Werte Y
-x̅ = round(256 / n, 3)   # Mittelwert bzw. Wahrscheinlichkeit / Anteil ausrechnen
-Y̅ = round(209 / m, 3)   # manchmal auch die Mitte eines Intervalls
+operator = "<"
+n = 200  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
+m = 300  # Anzahl Werte Y
+x̅ = round(4 / n, 3)   # Mittelwert bzw. Wahrscheinlichkeit / Anteil ausrechnen
+Y̅ = round(15 / m, 3)   # manchmal auch die Mitte eines Intervalls
 
-𝛼 = 0.05
+𝛼 = 0.10
 
 p_dach = round((n * x̅ + m * Y̅) / (n + m), 3)
 T = round((x̅ - Y̅)/math.sqrt(p_dach * (1 - p_dach) * (1/n + 1/m)), 3)

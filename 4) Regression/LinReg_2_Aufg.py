@@ -2,18 +2,18 @@ import math
 from scipy.stats import t
 
 """Eingabe"""
-Y = "Ausgaben für Wohnen in Euro"
-X = "Finanzen in Euro"
-n = 70 # Anzahl Zeilen bzw. n-WErt der Summen
+Y = "körperliche Leistungsfähigkeit"
+X = "kognitive Leistungsfähigkeit"
+n = 323 # Anzahl Zeilen bzw. n-WErt der Summen
 summe_x_hoch2_v = 48008500  # Summe von x^2_v
-š_hoch2_x = 335000   # varianz
-š_hoch2_y = 6900
-ß_dach_1 = 0.150
-ß_dach_0 = 185
+š_hoch2_x = 277.828   # varianz
+š_hoch2_y = 218.452
+ß_dach_1 = 0.048
+ß_dach_0 = 13.504
 s_hoch2_E = 4500
-R_hoch2 = 0.7
+R_hoch2 = 0.0029
 KI_ß_dach_1 = [0.14, 0.16]
-𝛼 = 0.05
+𝛼 = 0.01
 
 
 print("--------------------")
@@ -21,8 +21,8 @@ print("1) Frage: Testen Sie ob Konstante signifikant kleiner/größer als xxx is
 print("")
 
 """Eingabe"""
-vergleichswert = 210
-operator = "<"
+vergleichswert = 0
+operator = ">"
 
 s_dach_B_0 = round(math.sqrt((s_hoch2_E * 1/n * summe_x_hoch2_v) / (n * š_hoch2_x)), 3) #Standardfehler der Residuen
 T = round((ß_dach_0 - vergleichswert) / s_dach_B_0, 3)  # 0 ist eigl b_1 aber wird immer mit 0 gerechnet?!

@@ -2,14 +2,13 @@ import math
 from scipy.stats import norm
 import os
 
-# ungetestet!!
-###Indiz: unterschiedliche Varianz -> σ^2_x != σ^2_y, Vergleich Erwartungswerte
+#ungetestet
 ### Rep 3.5a
 
 """Eingabe"""
 operator = ">"
-n = 15  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
-m = 20  # Anzahl Werte Y
+n = 397  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
+m = 328  # Anzahl Werte Y
 x̅ = 65   # Mittelwert
 Y̅ = 60
 S_hoch2_x = round(5.4**2, 3)  # Stichprobenvarianz

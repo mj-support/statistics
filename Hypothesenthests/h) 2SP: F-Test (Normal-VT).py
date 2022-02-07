@@ -9,10 +9,10 @@ import os
 operator = "="
 n = 10  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
 m = 10  # Anzahl Werte Y
-S_hoch2_x = round(50**2, 3)  # Stichprobenvarianz
+S_hoch2_x = round(50**2, 3)  # Stichprobenvarianz; Standardabweichung^2
 S_hoch2_y = round(25**2, 3)
 
-𝛼 = 0.05
+𝛼 = 0.1
 
 T = round(S_hoch2_x / S_hoch2_y, 3)
 

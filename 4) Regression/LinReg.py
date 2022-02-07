@@ -3,15 +3,15 @@ from scipy.stats import t
 #FS. S. 49
 
 """Eingabe"""
-Y = "Ausgaben für Wohnen in Euro"
-X = "Finanzen in Euro"
-n = 200 # Anzahl Zeilen bzw. n-WErt der Summen
-summe_x_v = 14829 # Summe von x_v
-summe_y_v = 83793  # Summe von y_v
-summe_x_v_mal_y_v = 7105297  # Summe von x_v * y_v
-summe_x_hoch2_v = 1230219  # Summe von x^2_v
-summe_y_hoch2_v = 43581817  # Summe von y^2_v
-S_hoch2_U = 616.942  # S^2_U  wird nicht verwendet
+Y = "kognitive Leistungsfähigkeit"
+X = "körperliche Leistungsfähigkeit"
+n = 323 # Anzahl Zeilen bzw. n-WErt der Summen
+summe_x_v = 941.84 # Summe von x_v
+summe_y_v = 17947.45  # Summe von y_v
+summe_x_hoch2_v = 18992.01  # Summe von x^2_v
+summe_y_hoch2_v = 6570487  # Summe von y^2_v
+summe_x_v_mal_y_v = 350110.1  # Summe von x_v * y_v
+#S_hoch2_U = 616.942  # S^2_U  wird nicht verwendet
 
 """Berechnungen"""
 x̅ = round(summe_x_v / n, 3)
@@ -82,25 +82,53 @@ print("")
 # Immer Hypothesentest für ß_1 und immmer beidseitig (S.50 / 51)
 """Eingabe"""
 𝛼 = 0.01
+operator = ">"
 
 s_hoch2_E = round(n / (n - 2) * š_y * š_y * (1 - R_hoch2), 3)     # Wurzel daraus ist der Standardfehler der Residuen
 s_dach_B_1 = round(math.sqrt(s_hoch2_E) / (math.sqrt(n) * š_x), 3)
 T = round((ß_dach_1 - 0) / s_dach_B_1, 3)  # 0 ist eigl b_1 aber wird immer mit 0 gerechnet?!
-KW = round(t.ppf(1 - 𝛼/2, n-2), 4)
-KB = "[-∞; -{0}] ∩ [{0}; +∞]".format(KW)
-if T < KW:
-    antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. {0} hat keinen signifikanten Einfluss auf {1}.".format(X, Y)
-else:
-    antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
-                  "Es kann ein signifikanter linearer Zusammenhang zwischen {0} und {1} angenommen werden.)".format(X, Y)
+
+if operator == "=":
+    H_0 = "H_0: ß_1 ≠ 0"
+    H_1 = "H_1: ß_1 = 0"
+    KW = round(t.ppf(1 - 𝛼/2, n-2), 4)
+    KW_satz = "+/-t_[1 - {0}/2; {1} - 2] = {2}".format(𝛼, n, KW)
+    KB = "[-∞; -{0}] v [{0}; +∞]".format(KW)
+    if T < KW:
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Der lineare Zusammenhang zwischen {0} und {1} ist nicht signifikant positiv.".format(X, Y)
+    else:
+        antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
+                      "Der lineare Zusammenhang zwischen {0} und {1} ist signifikant positiv.".format(X, Y)
+elif operator == ">":
+    H_0 = "H_0: ß_1 <= 0"
+    H_1 = "H_1: ß_1 > 0"
+    KW = round(t.ppf(1 - 𝛼, n-2), 4)
+    KW_satz = "t_[1 - {0}; {1} - 2] = {2}".format(𝛼, n, KW)
+    KB = "[{0}; +∞]".format(KW)
+    if T < KW:
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Der lineare Zusammenhang zwischen {0} und {1} ist nicht signifikant negativ.".format(X, Y)
+    else:
+        antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
+                      "Der lineare Zusammenhang zwischen {0} und {1} ist signifikant negativ.".format(X, Y)
+elif operator == "<":
+    H_0 = "H_0: ß_1 >= 0"
+    H_1 = "H_1: ß_1 < 0"
+    KW = round(t.ppf(𝛼, n-2), 4)
+    KW_satz = "t_[{0}; {1} - 2] = {2}".format(𝛼, n, KW)
+    KB = "[-∞; {0}]".format(KW)
+    if T < KW:
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. {0} hat keinen signifikanten Einfluss auf {1}.".format(X, Y)
+    else:
+        antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
+                      "Es kann ein signifikanter linearer Zusammenhang zwischen {0} und {1} angenommen werden.)".format(X, Y)
 
 print("𝛼 = {0}".format(𝛼))
-print("H_0: ß_1 ≠ 0")
-print("H_1: ß_1 = 0")
+print("H_0: {0}".format(H_0))
+print("H_1: {0}".format(H_1))
 print("s²_E = {0}/({0} - 2) * {1}² * (1 - {2}) = {3}".format(n, š_y, R_hoch2, s_hoch2_E))
 print("s_dach_B_1 = WURZEL({0})/(WURZEL({1}) * {2}) = {3}".format(s_hoch2_E, n, š_x, s_dach_B_1))
 print("T = ({0} - {1})/{2} = {3}".format(ß_dach_1, 0, s_dach_B_1, T))
-print("KW = +/-t_[1 - {0}/2; {1} - 2] = {2}".format(𝛼, n, KW))
+print("KW = {0}".format(KW_satz))
 print("KB = {0}".format(KB))
 print(antwortsatz)
 
@@ -112,22 +140,22 @@ print("5) Frage: Berechnen Sie ein Prognoseintervall der Milchanlieferungen"
 print("")
 #S. 51
 """Eingabe"""
-x_B = 100
+x_B = 25
 𝛼 = 0.05
 
-y_dach_B = round(ß_dach_0 + ß_dach_1 * x_B, 3)
+y_dach_0 = round(ß_dach_0 + ß_dach_1 * x_B, 3)
 t_verteilung = round(t.ppf(1 - 𝛼/2, n-2), 4)
 s_y_dach_0_minus_s_y_0 = round(math.sqrt(s_hoch2_E * (1 + 1 / n + ((x_B - x̅) * (x_B - x̅)) / (n * š_hoch2_x))), 3)
-PI_1 = round(y_dach_B + t_verteilung * s_y_dach_0_minus_s_y_0, 3)
-PI_2 = round(y_dach_B - t_verteilung * s_y_dach_0_minus_s_y_0, 3)
+PI_1 = round(y_dach_0 + t_verteilung * s_y_dach_0_minus_s_y_0, 3)
+PI_2 = round(y_dach_0 - t_verteilung * s_y_dach_0_minus_s_y_0, 3)
 PI = "[{0}; {1}]".format(PI_1, PI_2)
 
 print("x_B = {0}".format(x_B))
 print("𝛼 = {0}".format(𝛼))
-print("y_dach_B = {0} + {1} * {2} = {3}".format(ß_dach_0, ß_dach_1, x_B, y_dach_B))
+print("y_dach_0 = {0} + {1} * {2} = {3}".format(ß_dach_0, ß_dach_1, x_B, y_dach_0))
 print("t_[1 - {0}/2; {1} - 2] = {2}".format(𝛼, n, t_verteilung))
 print("s_y_dach_0-y_0 = WURZEL({0} * (1 + 1/{1} + ({2} - {3})/({1} * {4})) = {5}".format(s_hoch2_E, n, x_B, x̅, š_hoch2_x, s_y_dach_0_minus_s_y_0))
-print("PI = [{0} +/- {1} * {2}] = {3}".format(y_dach_B, t_verteilung, s_y_dach_0_minus_s_y_0, PI))
+print("PI = [{0} +/- {1} * {2}] = {3}".format(y_dach_0, t_verteilung, s_y_dach_0_minus_s_y_0, PI))
 print("NOCH ÜBERARBEITEN!! Mit einer Wahrscheinlichkeit von {0}% liegen bei {1} {2} die {3} zwischen {4} und {5}.".format(1 - 𝛼, x_B, X, Y, PI_1, PI_2 ))
 
 

@@ -5,9 +5,9 @@ from scipy.stats import norm
 # Ü3.5a, 3.7c, 3.10a
 
 """Eingabe"""
-n = 467
-x̅ = 38.25133   # round(256 / 400, 3)
-𝛼 = 0.01
+n = 400
+x̅ = 8 / 400   # round(256 / 400, 3)
+𝛼 = 0.05
 
 z_value = round(norm.ppf(1 - 𝛼 / 2), 2)
 teilrechnung = round(z_value * math.sqrt((x̅ * (1 - x̅)) / n), 3)

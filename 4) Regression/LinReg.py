@@ -3,14 +3,14 @@ from scipy.stats import t
 #FS. S. 49
 
 """Eingabe"""
-Y = "kognitive Leistungsfähigkeit"
-X = "körperliche Leistungsfähigkeit"
-n = 323 # Anzahl Zeilen bzw. n-WErt der Summen
-summe_x_v = 941.84 # Summe von x_v
-summe_y_v = 17947.45  # Summe von y_v
-summe_x_hoch2_v = 18992.01  # Summe von x^2_v
-summe_y_hoch2_v = 6570487  # Summe von y^2_v
-summe_x_v_mal_y_v = 350110.1  # Summe von x_v * y_v
+Y = "Zahl der Sterne"
+X = "Übernachtungspreis in €"
+n = 12 # Anzahl Zeilen bzw. n-WErt der Summen
+summe_x_v = 741 # Summe von x_v
+summe_y_v = 789  # Summe von y_v
+summe_x_hoch2_v = 55347  # Summe von x^2_v
+summe_y_hoch2_v = 55621  # Summe von y^2_v
+summe_x_v_mal_y_v = 52816  # Summe von x_v * y_v
 #S_hoch2_U = 616.942  # S^2_U  wird nicht verwendet
 
 """Berechnungen"""
@@ -21,6 +21,7 @@ y̅ = round(summe_y_v / n, 3)
 š_hoch2_y = round(summe_y_hoch2_v / n - y̅ * y̅, 3)
 š_y = round(math.sqrt(š_hoch2_y), 3)
 š_xy = round(1 / n * summe_x_v_mal_y_v - x̅ * y̅, 3)  # Kovarianz (S.14) -> wenn Positiv, d.h. je mehr x desto mehr y
+
 
 print("Rechenhilfen")
 print("x̅ = {0}/{1} = {2}".format(summe_x_v, n, x̅))
@@ -61,7 +62,9 @@ print("Interpretieren Sie dieses.")
 print("")
 
 R_hoch2 = round(r_xy * r_xy, 4)
-R_hoch2_prozent = R_hoch2 * 100
+R_hoch2_prozent = round(R_hoch2 * 100, 4)
+S_hoch2_U = round(n/(n-2) * š_hoch2_y * (1 - r_xy**2), 3)   # Standardfehler der Residuen
+
 if R_hoch2_prozent < 40:
     modellgüte = "geringe Modellgüte"
 elif R_hoch2_prozent < 60:
@@ -71,6 +74,7 @@ elif R_hoch2_prozent < 80:
 else:
     modellgüte = "sehr hohe Modellgüte"
 print("R² = {0}² = {1}".format(r_xy, R_hoch2))
+print("s^2_U = {0}/({0} - 2) * {1} * (1 - {2}^2) = {3}".format(n, š_hoch2_y, r_xy, S_hoch2_U))
 print("{0}% der Gesamtstreuung der linearen Regression bzw. des linearen Modells werden erklärt. "
       "Es liegt eine {1} vor.".format(R_hoch2_prozent, modellgüte))
 
@@ -82,23 +86,23 @@ print("")
 # Immer Hypothesentest für ß_1 und immmer beidseitig (S.50 / 51)
 """Eingabe"""
 𝛼 = 0.01
-operator = ">"
+operator = "="
 
 s_hoch2_E = round(n / (n - 2) * š_y * š_y * (1 - R_hoch2), 3)     # Wurzel daraus ist der Standardfehler der Residuen
 s_dach_B_1 = round(math.sqrt(s_hoch2_E) / (math.sqrt(n) * š_x), 3)
 T = round((ß_dach_1 - 0) / s_dach_B_1, 3)  # 0 ist eigl b_1 aber wird immer mit 0 gerechnet?!
 
 if operator == "=":
-    H_0 = "H_0: ß_1 ≠ 0"
-    H_1 = "H_1: ß_1 = 0"
+    H_0 = "H_0: ß_1 = 0"
+    H_1 = "H_1: ß_1 ≠ 0"
     KW = round(t.ppf(1 - 𝛼/2, n-2), 4)
     KW_satz = "+/-t_[1 - {0}/2; {1} - 2] = {2}".format(𝛼, n, KW)
     KB = "[-∞; -{0}] v [{0}; +∞]".format(KW)
     if T < KW:
-        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Der lineare Zusammenhang zwischen {0} und {1} ist nicht signifikant positiv.".format(X, Y)
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. {0} hat keinen signifikanten Einfluss auf {1}.".format(X, Y)
     else:
         antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
-                      "Der lineare Zusammenhang zwischen {0} und {1} ist signifikant positiv.".format(X, Y)
+                      "Es kann ein signifikanter linearer Zusammenhang zwischen {0} und {1} angenommen werden.)".format(X, Y)
 elif operator == ">":
     H_0 = "H_0: ß_1 <= 0"
     H_1 = "H_1: ß_1 > 0"
@@ -117,10 +121,10 @@ elif operator == "<":
     KW_satz = "t_[{0}; {1} - 2] = {2}".format(𝛼, n, KW)
     KB = "[-∞; {0}]".format(KW)
     if T < KW:
-        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. {0} hat keinen signifikanten Einfluss auf {1}.".format(X, Y)
+        antwortsatz = "T∉K -> H_0 kann nicht verworfen werden. Der lineare Zusammenhang zwischen {0} und {1} ist nicht signifikant positiv.".format(X, Y)
     else:
         antwortsatz = "T∈K -> Damit wird die H_0 zum vorliegenden Signifikanzniveau verworfen. " \
-                      "Es kann ein signifikanter linearer Zusammenhang zwischen {0} und {1} angenommen werden.)".format(X, Y)
+                      "Der lineare Zusammenhang zwischen {0} und {1} ist signifikant positiv.".format(X, Y)
 
 print("𝛼 = {0}".format(𝛼))
 print("H_0: {0}".format(H_0))

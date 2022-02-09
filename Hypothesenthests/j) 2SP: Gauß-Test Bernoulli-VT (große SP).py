@@ -7,10 +7,10 @@ import os
 
 """Eingabe"""
 operator = "<"
-n = 200  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
-m = 300  # Anzahl Werte Y
-x̅ = round(4 / n, 3)   # Mittelwert bzw. Wahrscheinlichkeit / Anteil ausrechnen
-Y̅ = round(15 / m, 3)   # manchmal auch die Mitte eines Intervalls
+n = 450  # Anzahl Werte X ## Achtung X gehört n und Y gehört zum m
+m = 1000  # Anzahl Werte Y
+x̅ = round(0.61, 3)   # Mittelwert bzw. Wahrscheinlichkeit / Anteil ausrechnen
+Y̅ = round(800 / m, 3)   # manchmal auch die Mitte eines Intervalls
 
 𝛼 = 0.10
 

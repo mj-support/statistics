@@ -5,14 +5,14 @@ import os
 # siehe Ü3.9b, Ü3.10a
 
 """Eingabe"""
-vergleichswert = 500
+vergleichswert = 90
 operator = "<"
 Y = "Erwartungswert"    # Erwartungswert
-n = 20
-x̅ = 492   # Mittelwert
+n = 25
+x̅ = 84   # Mittelwert
 µ_0 = vergleichswert  # unbekannter Erwartungwert
-S = round(math.sqrt(82), 3)   # Wurzel aus Varianz der Stichprobe
-𝛼 = 0.05
+S = 15 #round(math.sqrt(6.98), 3)   # Wurzel aus Varianz der Stichprobe
+𝛼 = 0.01
 
 T = round(math.sqrt(n) * (x̅ - µ_0) / S, 3)
 

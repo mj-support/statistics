@@ -6,11 +6,11 @@ import os
 # Ü3.8a, 3.13b
 
 """Eingabe"""
-vergleichswert = 0.02
+vergleichswert = 0.61
 operator = ">"
 Y = "Anteil"    # Wahrscheinlichkeit / Anteil
-n = 400
-x̅ = round(12/n, 3)   # Anteil bspw. 4/200
+n = 2000
+x̅ = round(1500/n, 3)   # Anteil bspw. 4/200
 p_0 = vergleichswert  # Wahrscheinlichkeit / Anteil
 𝛼 = 0.05
 
